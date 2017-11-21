@@ -1,10 +1,11 @@
 import {createReadStream} from 'fs'
-import Debug from 'debug'
+// import Debug from 'debug'
 import apkParser from 'node-apk-parser'
 import {androidpublisher} from 'googleapis'
 import assert from 'assert'
 
-var debug = Debug('playup')
+// var debug = Debug('playup')
+var debug = console.log
 var publisher = androidpublisher('v2')
 var versionCodes = []
 
