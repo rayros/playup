@@ -1,6 +1,5 @@
 import {createReadStream} from 'fs'
-// import Debug from 'debug'
-import apkParser from 'node-apk-parser'
+import ApkReader from 'adbkit-apkreader'
 import {androidpublisher} from 'googleapis'
 import assert from 'assert'
 
@@ -43,22 +42,19 @@ export default class Upload {
 
   parseManifest () {
     debug('> Parsing manifest')
-    // Wrapping in promise because apkParser throws in case of error
-    return new Promise((done, reject) => {
-      try {
-        var reader = apkParser.readFile(this.apk[0])
-        var manifest = reader.readManifestSync()
+
+    return ApkReader.open(this.apk[0])
+      .then(reader => reader.readManifest())
+      .then(manifest => {
         this.packageName = manifest.package
         this.versionCode = manifest.versionCode
         debug('> Detected package name %s', this.packageName)
         debug('> Detected version code %d', this.versionCode)
-        done({
-         package: manifest.package,
-         versionCode: manifest.versionCode
-      })} catch (error) {
-        reject(error)
-      }
-    })
+        return {
+          package: manifest.package,
+          versionCode: manifest.versionCode
+        }
+      })
   }
 
   authenticate () {
