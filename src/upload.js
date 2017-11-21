@@ -1,4 +1,5 @@
 import {createReadStream} from 'fs'
+import Debug from 'debug'
 import ApkReader from 'adbkit-apkreader'
 import {androidpublisher} from 'googleapis'
 import assert from 'assert'
