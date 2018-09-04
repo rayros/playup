@@ -12,7 +12,7 @@ export default class Upload {
   constructor (client, apk, params = {track: 'alpha', obbs: [], recentChanges: {}}) {
     assert(client, 'I require a client')
     assert(apk, 'I require an APK route')
-    assert(Upload.tracks.indexOf(params.track) !== -1, 'Unknown track')
+    // assert(Upload.tracks.indexOf(params.track) !== -1, 'Unknown track')
 
     this.client = client
 
