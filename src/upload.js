@@ -204,7 +204,7 @@ export default class Upload {
 
     let tracksToSuperseed = trackList.tracks.filter((track) => {
       return ((Upload.tracks.findIndex((trackName) => {return (trackName === track.track)}) < Upload.tracks.findIndex(((trackName) => {return (trackName === this.track)}))) &&
-       (Boolean(track.versionCodes.find((versionCode) => {return (versionCode < this.versionCode)}))))
+        (Boolean(track.versionCodes && track.versionCodes.find((versionCode) => {return (versionCode < this.versionCode)}))))
     })
     return Promise.all(this.getSuperseedPromises(tracksToSuperseed))
        .then(() => {debug('> Superseded APKs were set')})
